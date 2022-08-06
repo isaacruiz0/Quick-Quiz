@@ -17,25 +17,29 @@ $text-color: #FFFFFF;
     height: 100%;
     font-family: 'Poppins', sans-serif;
     display: grid;
-    grid-template-rows: 1fr 4fr;
-
+    grid-template-rows: 1fr 5fr;
     .titleDiv{
         display: flex;
         flex-direction: column;
-
+        align-items: center;
+        justify-content: center;
+        background-color: $primary-color;
         h1{
             text-align: center;
             color: $text-color;
+            padding: 3rem 0;
+            line-height: 4rem;
 
             font-size: 4rem;
-            padding: 1rem;
             font-weight: 800;
             @media screen and (min-width: 700px){
-                font-size:7rem
+                font-size:6rem;
+                padding: 6rem 0;
             }
-        }
-        svg{
-            padding: 0;
+            @media screen and (min-width: 900px){
+                font-size:8rem;
+                padding: 6rem 0;
+            }
         }
         
     }
@@ -45,26 +49,43 @@ $text-color: #FFFFFF;
         display: flex;
         flex-direction: column;
         align-items: center;
+        border-top-left-radius: 3.75rem;
+        border-top-right-radius: 3.75rem;
+        @media screen and (min-width: 700px){
+            border-top-left-radius: 6.75rem;
+            border-top-right-radius: 6.75rem;
+        }
+
         p{
-            padding: 1rem;
-            font-size: 1.25rem;
+            padding: 2rem;
+            font-size: 1.75rem;
             color: $text-color;
             font-weight: 600;
             text-align: center;
-            @media screen and (min-width: 700px){
-                font-size: 2.5rem;
-                position: absolute;
-                bottom: 30%;
+            @media screen and (min-width: 900px){
+                font-size: 3rem;
+                padding: 3rem 25vw;
             }
         }
         button{
-            padding: .5rem;
-            font-size: 1.25rem;
+            padding: .75rem;
+            font-size: 1.5rem;
             border-radius: 5px;
             background-color: transparent;
-            font-weight: 600;
+            font-weight: 400;
             border: 2px solid $text-color;
             color: $text-color;
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            cursor: pointer;
+            @media screen and (min-width: 500px){
+
+            }
+            &:hover{
+                background-color: #013cba5e;
+                transition: all .25s ease-in-out;
+            }
         }
     }
 }
