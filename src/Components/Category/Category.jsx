@@ -22,9 +22,9 @@ function Category() {
   return (
     <motion.div
      id='category'  
-     initial={{x: -window.innerWidth}}
-     animate={{opacity:1, width: "100%", x:0, transition: {duration: .2}}}
-     exit={{x: -window.innerWidth, transition: {duration: .2}}}
+     initial={{x: -window.innerWidth, y: 0}}
+     animate={{x:0, transition: {duration: .3}, y:0}}
+     exit={{x: -window.innerWidth, transition: {duration: .3}}}
     >
       <div className="titleDiv">
         <h1 onClick={()=>{navigate('/')}}>Choose Category</h1>

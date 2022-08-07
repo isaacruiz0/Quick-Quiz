@@ -28,6 +28,7 @@ $text-color: #FFFFFF;
             color: $text-color;
             padding: 3rem 0;
             line-height: 4rem;
+            user-select: none;
 
             font-size: 4rem;
             font-weight: 800;
@@ -64,6 +65,7 @@ $text-color: #FFFFFF;
             color: $text-color;
             font-weight: 600;
             text-align: center;
+            user-select: none;
             @media screen and (min-width: 900px){
                 font-size: 3rem;
                 padding: 3rem 25vw;
