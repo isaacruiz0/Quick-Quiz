@@ -2,6 +2,12 @@
 $primary-color: #FFCC01;
 $secondary-color: #006CB7;
 $accent-color: #013CBA;
+// Poppins Font Regular
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+// Popping Font Bold
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap');
+// Poppins Front SemiBold
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&display=swap');
 
 *{
     box-sizing: border-box;

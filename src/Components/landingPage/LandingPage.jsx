@@ -3,7 +3,6 @@ import './landingPage.scss'
 import {useNavigate} from 'react-router-dom';
 import { motion } from 'framer-motion';
 
-
 import { BsArrowRightCircle } from 'react-icons/bs'
 
 
@@ -14,8 +13,8 @@ function LandingPage() {
     // This will animate our page transitions
     <motion.div
      id='landingPage'
-     initial={{x: -window.innerWidth}}
-     animate={{opacity:1, width: "100%", x:0, transition: {duration: .2}}}
+     initial={{x: -window.innerWidth, y: 0}}
+     animate={{opacity:1, width: "100%", x:0, transition: {duration: .3}, y:0}}
      exit={{x: -window.innerWidth, transition: {duration: .2}}}
      >
         <div className="titleDiv">
