@@ -13,9 +13,9 @@ function LandingPage() {
     // This will animate our page transitions
     <motion.div
      id='landingPage'
-     initial={{x: -window.innerWidth, y: 0}}
-     animate={{x:0, transition: {duration: .3}, y:0}}
-     exit={{x: -window.innerWidth, transition: {duration: .3}}}
+     initial={{x: -window.innerWidth, y: 0, opacity:0}}
+     animate={{x:0, transition: {duration: .3}, y:0, opacity:1}}
+     exit={{x: -window.innerWidth, transition: {duration: .3}, opacity:0}}
      >
         <div className="titleDiv">
             <h1>Quick Quiz</h1>

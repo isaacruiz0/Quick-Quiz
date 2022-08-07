@@ -22,22 +22,22 @@ function Category() {
   return (
     <motion.div
      id='category'  
-     initial={{x: -window.innerWidth, y: 0}}
-     animate={{x:0, transition: {duration: .3}, y:0}}
-     exit={{x: -window.innerWidth, transition: {duration: .3}}}
+     initial={{x: -window.innerWidth, y: 0, opacity:0}}
+     animate={{x:0, transition: {duration: .3}, y:0, opacity:1}}
+     exit={{x: -window.innerWidth, transition: {duration: .3}, opacity:0}}
     >
       <div className="titleDiv">
         <h1 onClick={()=>{navigate('/')}}>Choose Category</h1>
       </div>
       <main>
-
-        {categories.map((categoryObject, key)=>{
+        {/* I am mapping through the categories array to make a div for each category and its icon */}
+        {categories.map((categoryObject, index)=>{
           const Icon = categoryObject.icon
-
+          const categoryName = categoryObject.category
           return (
-            <div className="categoryChoice">
+            <div className="categoryChoice" key={index} onClick={()=>{navigate('/category/difficulty',{state:{name: categoryName}})}}>
               <Icon className='categoryIcons'/>
-              <h3>{categoryObject.category}</h3>
+              <h3>{categoryName}</h3>
             </div>
           )
         })}
