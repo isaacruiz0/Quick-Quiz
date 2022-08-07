@@ -1,5 +1,6 @@
 import React from 'react'
 import './landingPage.scss'
+import { useEffect } from 'react';
 
 import {useNavigate} from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -9,6 +10,10 @@ import { BsArrowRightCircle } from 'react-icons/bs'
 
 function LandingPage() {
   const navigate = useNavigate()
+  useEffect(()=>{
+    window.scrollTo(0, 0)
+  },[])
+
 
   return (
     // This will animate our page transitions

@@ -26,8 +26,9 @@ $text-color: #FFFFFF;
             padding: 3rem 0;
             line-height: 4rem;
             user-select: none;
+            cursor: pointer;
 
-            font-size: 4rem;
+            font-size: 3rem;
             font-weight: 800;
             @media screen and (min-width: 700px){
                 font-size:5rem;

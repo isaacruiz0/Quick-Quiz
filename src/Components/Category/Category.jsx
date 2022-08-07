@@ -1,5 +1,7 @@
 import React from 'react'
 import './category.scss'
+import { useEffect } from 'react';
+
 import {useNavigate} from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { MdMenuBook } from "react-icons/md";
@@ -11,6 +13,9 @@ import { FaFilm } from 'react-icons/fa';
 
 function Category() {
   const navigate = useNavigate()
+  useEffect(()=>{
+    window.scrollTo(0, 0)
+  },[])
 
   const categories = [
     {category: 'General Knowledge', icon: MdMenuBook},

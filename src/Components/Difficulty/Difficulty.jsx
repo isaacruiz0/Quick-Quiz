@@ -1,5 +1,6 @@
 import React from 'react'
 import {useLocation, useNavigate} from 'react-router-dom';
+import { useEffect } from 'react';
 import './difficulty.scss'
 import { motion } from 'framer-motion';
 
@@ -10,6 +11,10 @@ function Difficulty() {
     const paramName = categoryName?.toLowerCase().replace(/ /g,"_");
     const difficultyChoices = ['easy', 'medium', 'hard']
 
+    useEffect(()=>{
+        window.scrollTo(0, 0)
+      },[])
+
     return (
         <motion.div
         id='difficulty'
@@ -18,7 +23,7 @@ function Difficulty() {
         exit={{x: -window.innerWidth, transition: {duration: .3}, opacity:0}}
         >
            <div className="titleDiv">
-               <h1 onClick={()=>{navigate('/')}}>Choose Difficulty</h1>
+               <h1 onClick={()=>{navigate('/')}}>{categoryName}</h1>
            </div>
            <main>
            {difficultyChoices.map((choice, index)=>{
