@@ -16,7 +16,7 @@ function Category() {
   useEffect(()=>{
     window.scrollTo(0, 0)
   },[])
-
+  // This will be used to map through to create a div with the titled category and an icon that compliments the category
   const categories = [
     {category: 'General Knowledge', icon: MdMenuBook},
     {category: 'Geography', icon: FaMountain},
@@ -37,6 +37,7 @@ function Category() {
       <main>
         {/* I am mapping through the categories array to make a div for each category and its icon */}
         {categories.map((categoryObject, index)=>{
+          // These are the variables I looped through
           const Icon = categoryObject.icon
           const categoryName = categoryObject.category
           return (

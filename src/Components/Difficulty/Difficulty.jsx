@@ -7,8 +7,11 @@ import { motion } from 'framer-motion';
 function Difficulty() {
     const location = useLocation()
     const navigate = useNavigate()
+    // This is the name that was passed down from the user selected category in the category component
     const categoryName = location.state?.name
+    // This will be the name we pass to the quiz component to be used for requests to the api
     const paramName = categoryName?.toLowerCase().replace(/ /g,"_");
+    // I am mapping through here to and making a div for each word
     const difficultyChoices = ['easy', 'medium', 'hard']
 
     useEffect(()=>{
@@ -28,8 +31,9 @@ function Difficulty() {
            <main>
            {difficultyChoices.map((choice, index)=>{
           return (
-            <div className='difficultyDiv'>
+            <div className='difficultyDiv' key={index}>
                 <h1>
+                    {/* This is to capitalize the first letter of the difficulty choice word */}
                     {choice.charAt(0).toUpperCase()+ choice.slice(1)}
                 </h1>
             </div>
