@@ -4,6 +4,7 @@ import { Routes, Route, useLocation} from 'react-router-dom';
 import LandingPage from '../Components/LandingPage/LandingPage'
 import Category from '../Components/Category/Category'
 import Difficulty from '../Components/Difficulty/Difficulty';
+import Quiz from '../Components/Quiz/Quiz';
 
 import {AnimatePresence} from "framer-motion"
 
@@ -17,6 +18,7 @@ function AnimatedRoutes() {
             <Route exact path='/' element={<LandingPage />} />
             <Route exact path='/category' element={<Category />} />
             <Route exact path='/category/difficulty' element={<Difficulty />} />
+            <Route exact path='/quiz' element={<Quiz />} />
         </Routes>
     </AnimatePresence>
     )

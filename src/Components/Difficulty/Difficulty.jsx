@@ -31,7 +31,8 @@ function Difficulty() {
            <main>
            {difficultyChoices.map((choice, index)=>{
           return (
-            <div className='difficultyDiv' key={index}>
+            // On click this div will pass the category name and the difficulty to the quiz component
+            <div className='difficultyDiv' key={index} onClick={()=>{navigate('/quiz',{state:{name: paramName, difficulty: choice}})}}>
                 <h1>
                     {/* This is to capitalize the first letter of the difficulty choice word */}
                     {choice.charAt(0).toUpperCase()+ choice.slice(1)}
