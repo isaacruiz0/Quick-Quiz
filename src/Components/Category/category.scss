@@ -55,7 +55,14 @@ $text-color: #FFFFFF;
         .categoryChoice{
             color: $text-color;
             background-color: $accent-color;
-            width: 40%;
+            width: 80%;
+            padding: 1rem;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.175);
+            .categoryIcons{
+                font-size: 3rem;
+            }
         }
     }
 }
