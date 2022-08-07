@@ -7,6 +7,7 @@ import Category from '../Components/Category/Category'
 import {AnimatePresence} from "framer-motion"
 
 function AnimatedRoutes() {
+    // We must declare the location hook outside of the router component
     const location = useLocation()
     // Motion divs must be within the animate presence component to be animated
     return (
