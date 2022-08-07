@@ -1,15 +1,37 @@
 import React from 'react'
 import {useLocation, useNavigate} from 'react-router-dom';
+import './difficulty.scss'
 import { motion } from 'framer-motion';
 
 function Difficulty() {
     const location = useLocation()
+    const navigate = useNavigate()
     const categoryName = location.state?.name
     const paramName = categoryName?.toLowerCase().replace(/ /g,"_");
+    const difficultyChoices = ['easy', 'medium', 'hard']
+
     return (
-    <div>
-        <h1>{paramName}</h1>
-    </div>
+        <motion.div
+        id='difficulty'
+        initial={{x: -window.innerWidth, y: 0, opacity:0}}
+        animate={{x:0, transition: {duration: .3}, y:0, opacity:1}}
+        exit={{x: -window.innerWidth, transition: {duration: .3}, opacity:0}}
+        >
+           <div className="titleDiv">
+               <h1 onClick={()=>{navigate('/')}}>Choose Difficulty</h1>
+           </div>
+           <main>
+           {difficultyChoices.map((choice, index)=>{
+          return (
+            <div className='difficultyDiv'>
+                <h1>
+                    {choice.charAt(0).toUpperCase()+ choice.slice(1)}
+                </h1>
+            </div>
+          )
+        })}
+           </main>
+       </motion.div>
     )
 }
 
