@@ -15,16 +15,25 @@ function Quiz() {
     const titleName = location.state?.originalName
     // These states will display the data of the question
     const [question,setQuestion] = useState('')
+    const [shuffledArray, setShuffledArray] = useState([])
 
-    const possibleAnswers = []
 
     const getQuiz = async () => {
         try{
             let response = await axios.get(`https://the-trivia-api.com/api/questions?categories=${categoryName}&limit=10&difficulty=${difficulty}`)
             setQuestion(response.data[0].question)
-            // This will add the correct answer to the possibleAnswers array
-            possibleAnswers.append(response.data[0].correctAnswer)
-
+            const possibleAnswers = []
+            // These two pushes will add the correct answer to the possibleAnswers array
+            possibleAnswers.push(response.data[0].correctAnswer)
+            response.data[0].incorrectAnswers.forEach(answer => {
+               possibleAnswers.push(answer)  
+            });
+            // this will shuffle the array so that the answer is at a different index
+            const sortAndShuffleArray = possibleAnswers.sort(() => {
+                return Math.random() - 0.5
+            })
+    
+            setShuffledArray(sortAndShuffleArray)
         } catch(err){
             console.log(err)
         }
@@ -54,7 +63,15 @@ function Quiz() {
                 <h4>{question}</h4>
             </header>
             <main>
-
+                {shuffledArray.map((possibleAnswer, index)=>{
+                    return (
+                        <div className="possibleAnswerDiv" key={index}>
+                            <h3>
+                                {possibleAnswer}
+                            </h3>
+                        </div>
+                    )
+                })}
             </main>
         </motion.div>
     )
