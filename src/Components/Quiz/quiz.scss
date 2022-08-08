@@ -1,0 +1,46 @@
+// Color Variables
+$primary-color: #FFCC01;
+$secondary-color: #006CB7;
+$accent-color: #013CBA;
+$text-color: #FFFFFF;
+#quiz{
+    display: flex;
+    flex-direction: column;
+    background-color: $primary-color;
+    height: 100%;
+    .title{
+        width: 100%;
+        display: flex;
+        padding: .5rem;
+        color: $text-color;
+        font-family: 'Poppins', sans-serif;
+        border-bottom: solid $text-color 1px;
+        align-items: center;
+        display: flex;
+        background-color: $secondary-color;
+        font-size: 1.2rem;
+        h5{
+            padding: 0;
+        }
+    }
+    header{
+        height: 30%;
+        display: flex;
+        align-items: center;
+        
+        background-color: $secondary-color;
+
+        h4{
+            color: $text-color;
+            font-family: 'Poppins', sans-serif;
+            padding: .25rem;
+            text-align: center;
+
+            font-size: 1.2rem;
+        }
+
+    }
+    main{
+        background-color: $primary-color;
+    }
+}

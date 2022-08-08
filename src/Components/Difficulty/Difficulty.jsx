@@ -3,6 +3,7 @@ import {useLocation, useNavigate} from 'react-router-dom';
 import { useEffect } from 'react';
 import './difficulty.scss'
 import { motion } from 'framer-motion';
+import {Helmet} from 'react-helmet'
 
 function Difficulty() {
     const location = useLocation()
@@ -25,6 +26,10 @@ function Difficulty() {
         animate={{x:0, transition: {duration: .3}, y:0, opacity:1}}
         exit={{x: -window.innerWidth, transition: {duration: .3}, opacity:0}}
         >
+            <Helmet>
+                <title>Quiz</title>
+                <meta name="theme-color" content="#FFCC01" />
+            </Helmet>
            <div className="titleDiv">
                <h1 onClick={()=>{navigate('/')}}>{categoryName}</h1>
            </div>
@@ -32,7 +37,7 @@ function Difficulty() {
            {difficultyChoices.map((choice, index)=>{
           return (
             // On click this div will pass the category name and the difficulty to the quiz component
-            <div className='difficultyDiv' key={index} onClick={()=>{navigate('/quiz',{state:{name: paramName, difficulty: choice}})}}>
+            <div className='difficultyDiv' key={index} onClick={()=>{navigate('/quiz',{state:{name: paramName, difficulty: choice, originalName: categoryName}})}}>
                 <h1>
                     {/* This is to capitalize the first letter of the difficulty choice word */}
                     {choice.charAt(0).toUpperCase()+ choice.slice(1)}

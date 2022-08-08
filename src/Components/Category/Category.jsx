@@ -1,6 +1,7 @@
 import React from 'react'
 import './category.scss'
 import { useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 
 import {useNavigate} from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -10,6 +11,7 @@ import { BsClockHistory } from 'react-icons/bs';
 import { MdOutlineScience } from 'react-icons/md';
 import { BsMusicNoteList } from 'react-icons/bs';
 import { FaFilm } from 'react-icons/fa';
+
 
 function Category() {
   const navigate = useNavigate()
@@ -31,6 +33,10 @@ function Category() {
      animate={{x:0, transition: {duration: .3}, y:0, opacity:1}}
      exit={{x: -window.innerWidth, transition: {duration: .3}, opacity:0}}
     >
+      <Helmet>
+          <title>Quiz</title>
+          <meta name="theme-color" content="#FFCC01" />
+      </Helmet>
       <div className="titleDiv">
         <h1 onClick={()=>{navigate('/')}}>Choose Category</h1>
       </div>
