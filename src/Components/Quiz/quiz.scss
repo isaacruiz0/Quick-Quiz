@@ -15,7 +15,7 @@ $text-color: #FFFFFF;
         padding: .5rem;
         color: $text-color;
         font-family: 'Poppins', sans-serif;
-        border-bottom: solid $text-color 1px;
+        border-bottom: solid $primary-color 1px;
         align-items: center;
         display: flex;
         background-color: $secondary-color;
@@ -43,6 +43,7 @@ $text-color: #FFFFFF;
             padding: .25rem;
             text-align: center;
             width: 100%;
+            letter-spacing: .1rem;
 
             font-size: 1.2rem;
             @media screen and (min-width: 600px){
