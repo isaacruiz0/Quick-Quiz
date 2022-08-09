@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import {useLocation, useNavigate} from 'react-router-dom';
 import './quiz.scss'
 import { useEffect, useState } from 'react';
@@ -125,7 +125,7 @@ function Quiz() {
     }
     const handleNextQuestion = (e) =>{
         setTimeout(()=>setNumberUserIsOn(numberUserIsOn + 1), timeOutTime) 
-        if (numberUserIsOn == 10){
+        if (numberUserIsOn === 10){
             // This will take them to page where they can see how well they did
             navigate('/quiz/results',{state:{results: numberOfQuestionsCorrect}})
         }

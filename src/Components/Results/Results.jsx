@@ -1,6 +1,5 @@
 import React from 'react'
 import './results.scss'
-import { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 
 import {useLocation, useNavigate} from 'react-router-dom';
