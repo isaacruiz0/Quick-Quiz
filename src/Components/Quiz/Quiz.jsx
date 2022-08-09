@@ -73,29 +73,33 @@ function Quiz() {
         }
 
     }, [questionArray])
+    // This will increment the question by displaying the next question and its possiblew answers
+    const incrementQuestion = () =>{
+        setQuestion(questionArray[questionNumber].question)
+        // This array will take in the incorrect answers and correct answers
+        let unshuffledArray = []
 
-    const handleNextQuestion = () =>{
+        // This will push all possible answers to the unshuffled array 
+        questionArray[questionNumber].incorrectAnswers.forEach(incorrectAnswer => unshuffledArray.push(incorrectAnswer))
+        unshuffledArray.push(questionArray[questionNumber].correctAnswer)
+        // We will shuffle the inncorrect and correct answers and then display the choces to the user
+        let shuffledArray = unshuffledArray.sort(() => (Math.random() > .5) ? 1 : -1)
 
-        setNumberUserIsOn(numberUserIsOn + 1)   
+        // This will set the unshuffled array to the be displayed 
+        setShuffledArray(shuffledArray)
+        
+        setQuestionNumber(questionNumber + 1)
+    }
+    const handleNextQuestion = (e) =>{
+
         if (numberUserIsOn > 10){
             // This will take them to page where they can see how well they did
-            
+            console.log(e.target.outerText)
+
+            setNumberUserIsOn(numberUserIsOn + 1)   
         }
         else{
-            setQuestion(questionArray[questionNumber].question)
-            // This array will take in the incorrect answers and correct answers
-            let unshuffledArray = []
-    
-            // This will push all possible answers to the unshuffled array 
-            questionArray[questionNumber].incorrectAnswers.forEach(incorrectAnswer => unshuffledArray.push(incorrectAnswer))
-            unshuffledArray.push(questionArray[questionNumber].correctAnswer)
-            // We will shuffle the inncorrect and correct answers and then display the choces to the user
-            let shuffledArray = unshuffledArray.sort(() => (Math.random() > .5) ? 1 : -1)
-    
-            // This will set the unshuffled array to the be displayed 
-            setShuffledArray(shuffledArray)
-            
-            setQuestionNumber(questionNumber + 1)
+            incrementQuestion()
          }
 
     }
@@ -119,9 +123,9 @@ function Quiz() {
                 <h4>{question}</h4>
             </header>
             <main>
-                {shuffledArray.map((possibleAnswer, index)=>{
+                {shuffledArray.map((possibleAnswer)=>{
                     return (
-                        <div className="possibleAnswerDiv" key={index} onClick={handleNextQuestion} >
+                        <div className="possibleAnswerDiv" key={possibleAnswer} onClick={handleNextQuestion} >
                             <h3>
                                 {possibleAnswer}
                             </h3>
