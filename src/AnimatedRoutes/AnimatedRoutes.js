@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes, Route, useLocation} from 'react-router-dom';
 // Pages
-import LandingPage from '../Components/LandingPage/LandingPage'
+import LandingPage from '../Components/LandingPage/LandingPage.jsx'
 import Category from '../Components/Category/Category'
 import Difficulty from '../Components/Difficulty/Difficulty';
 import Quiz from '../Components/Quiz/Quiz';
