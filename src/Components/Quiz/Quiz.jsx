@@ -19,6 +19,8 @@ function Quiz() {
     const [questionArray, setQuestionArray] = useState([])
     // This will display what number the user is on
     const [numberUserIsOn, setNumberUserIsOn] =useState(1)
+    // This shows how many questions the user got correct
+    const [numberOfQuestionsCorrect, setNumberOfQuestionsCorrect] = useState(0)
 
     let timeOutTime = 450
 
@@ -38,9 +40,6 @@ function Quiz() {
             // This sets the data to question array so that it is accessible outside of this function
             setQuestionArray(arrayDataResponse)
 
-            // this outputs an empty array
-            console.log(questionArray)
-
         } catch(err){
             console.log(err)
         }
@@ -55,7 +54,6 @@ function Quiz() {
 
         if (questionArray[0]) { 
             setQuestion(questionArray[0].question) 
-            console.log(questionArray)
 
             // This array will take in the incorrect answers and correct answers
             let unshuffledArray = []
@@ -69,7 +67,6 @@ function Quiz() {
             // This will set the unshuffled array to the be displayed 
             setShuffledArray(shuffledArray)
 
-            console.log(unshuffledArray)
         }
 
     }, [questionArray])
@@ -96,7 +93,6 @@ function Quiz() {
     }
     // This will handle the logic for comparing the correct answer with the user's answer
     const handleCorrectAnswer = (e) => {
-        console.log(e.target)
         // This is the content of the div that the user clicked
         let userAnswer = e.target.outerText
         // Since our "numberUserIsOn" state begins on 1 I am manually checking the first questions answers
@@ -104,22 +100,26 @@ function Quiz() {
             if(questionArray[0].correctAnswer === userAnswer){
                 console.log('correct answer!', questionNumber)
                 e.currentTarget.classList.add('green')
+                // This is keeping track of how many questions the user gets correcet
+                setNumberOfQuestionsCorrect(numberOfQuestionsCorrect + 1)
 
             }
             else{
-                console.log(questionNumber)
                 e.currentTarget.classList.add('red')
+                
             }
         }
         else{
             // Subtract for array index reasons
             if(questionArray[questionNumber-1].correctAnswer === userAnswer){
-                console.log('correct answerj', questionNumber)
                 e.currentTarget.classList.add('green')
+                // This is keeping track of how many questions the user gets correcet
+                setNumberOfQuestionsCorrect(numberOfQuestionsCorrect + 1)
+
             }
             else{
                 e.currentTarget.classList.add('red')
-                console.log('incorrect answer', questionNumber)
+
             }
         }
     }
@@ -127,14 +127,17 @@ function Quiz() {
         setTimeout(()=>setNumberUserIsOn(numberUserIsOn + 1), timeOutTime) 
         if (numberUserIsOn == 10){
             // This will take them to page where they can see how well they did
-            navigate('/quiz/results')
+            navigate('/quiz/results',{state:{results: numberOfQuestionsCorrect}})
         }
         else{
             incrementQuestion()
             handleCorrectAnswer(e)
-         }
 
+         }
     }
+    useEffect(()=>{
+        console.log(numberOfQuestionsCorrect)
+    },[numberOfQuestionsCorrect])
 
     return (
         <motion.div
