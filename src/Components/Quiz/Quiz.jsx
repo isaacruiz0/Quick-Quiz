@@ -75,31 +75,58 @@ function Quiz() {
     }, [questionArray])
     // This will increment the question by displaying the next question and its possiblew answers
     const incrementQuestion = () =>{
-        setQuestion(questionArray[questionNumber].question)
-        // This array will take in the incorrect answers and correct answers
-        let unshuffledArray = []
+        // This will delay the increment of the question so that the user has time to see whether they got the question correct or wrong via the green and red highlight
+        setTimeout(()=>{
+            
+            setQuestion(questionArray[questionNumber].question)
+            // This array will take in the incorrect answers and correct answers
+            let unshuffledArray = []
 
-        // This will push all possible answers to the unshuffled array 
-        questionArray[questionNumber].incorrectAnswers.forEach(incorrectAnswer => unshuffledArray.push(incorrectAnswer))
-        unshuffledArray.push(questionArray[questionNumber].correctAnswer)
-        // We will shuffle the inncorrect and correct answers and then display the choces to the user
-        let shuffledArray = unshuffledArray.sort(() => (Math.random() > .5) ? 1 : -1)
+            // This will push all possible answers to the unshuffled array 
+            questionArray[questionNumber].incorrectAnswers.forEach(incorrectAnswer => unshuffledArray.push(incorrectAnswer))
+            unshuffledArray.push(questionArray[questionNumber].correctAnswer)
+            // We will shuffle the inncorrect and correct answers and then display the choces to the user
+            let shuffledArray = unshuffledArray.sort(() => (Math.random() > .5) ? 1 : -1)
 
-        // This will set the unshuffled array to the be displayed 
-        setShuffledArray(shuffledArray)
-        
-        setQuestionNumber(questionNumber + 1)
+            // This will set the unshuffled array to the be displayed 
+            setShuffledArray(shuffledArray)
+            
+            setQuestionNumber(questionNumber + 1)
+        }, 2000)
+    }
+    const handleCorrectAnswer = (e) => {
+        console.log(e.target)
+        // This is the content of the div that the user clicked
+        let userAnswer = e.target.outerText
+        // Since our "numberUserIsOn" state begins on 1 I am manually checking the first questions answers
+        if(numberUserIsOn === 1){
+            if(questionArray[0].correctAnswer === userAnswer){
+                console.log('correct answer!', questionNumber)
+            }
+            else{
+                console.log(questionNumber)
+            }
+        }
+        else{
+            // Subtract for array index reasons
+            if(questionArray[questionNumber-1].correctAnswer === userAnswer){
+                console.log('correct answerj', questionNumber)
+            }
+            else{
+                console.log('incorrect answer', questionNumber)
+            }
+        }
     }
     const handleNextQuestion = (e) =>{
-
+        setTimeout(()=>setNumberUserIsOn(numberUserIsOn + 1), 2000) 
         if (numberUserIsOn > 10){
             // This will take them to page where they can see how well they did
-            console.log(e.target.outerText)
 
-            setNumberUserIsOn(numberUserIsOn + 1)   
+            
         }
         else{
             incrementQuestion()
+            handleCorrectAnswer(e)
          }
 
     }
@@ -125,7 +152,7 @@ function Quiz() {
             <main>
                 {shuffledArray.map((possibleAnswer)=>{
                     return (
-                        <div className="possibleAnswerDiv" key={possibleAnswer} onClick={handleNextQuestion} >
+                        <div className="possibleAnswerDiv" id={possibleAnswer} key={possibleAnswer} onClick={handleNextQuestion} >
                             <h3>
                                 {possibleAnswer}
                             </h3>
