@@ -19,6 +19,9 @@ function Quiz() {
     const [questionArray, setQuestionArray] = useState([])
     // This will display what number the user is on
     const [numberUserIsOn, setNumberUserIsOn] =useState(1)
+    const [textOfUserAnswer, setTextOfUserAnswer] = useState('')
+
+    let timeOutTime = 400
 
 
 
@@ -92,33 +95,39 @@ function Quiz() {
             setShuffledArray(shuffledArray)
             
             setQuestionNumber(questionNumber + 1)
-        }, 2000)
+        }, timeOutTime)
     }
     const handleCorrectAnswer = (e) => {
         console.log(e.target)
         // This is the content of the div that the user clicked
         let userAnswer = e.target.outerText
+        setTextOfUserAnswer(userAnswer)
         // Since our "numberUserIsOn" state begins on 1 I am manually checking the first questions answers
         if(numberUserIsOn === 1){
             if(questionArray[0].correctAnswer === userAnswer){
                 console.log('correct answer!', questionNumber)
+                e.currentTarget.classList.add('green')
+
             }
             else{
                 console.log(questionNumber)
+                e.currentTarget.classList.add('red')
             }
         }
         else{
             // Subtract for array index reasons
             if(questionArray[questionNumber-1].correctAnswer === userAnswer){
                 console.log('correct answerj', questionNumber)
+                e.currentTarget.classList.add('green')
             }
             else{
+                e.currentTarget.classList.add('red')
                 console.log('incorrect answer', questionNumber)
             }
         }
     }
     const handleNextQuestion = (e) =>{
-        setTimeout(()=>setNumberUserIsOn(numberUserIsOn + 1), 2000) 
+        setTimeout(()=>setNumberUserIsOn(numberUserIsOn + 1), timeOutTime) 
         if (numberUserIsOn > 10){
             // This will take them to page where they can see how well they did
 
@@ -152,7 +161,7 @@ function Quiz() {
             <main>
                 {shuffledArray.map((possibleAnswer)=>{
                     return (
-                        <div className="possibleAnswerDiv" id={possibleAnswer} key={possibleAnswer} onClick={handleNextQuestion} >
+                        <div key={possibleAnswer} onClick={handleNextQuestion} >
                             <h3>
                                 {possibleAnswer}
                             </h3>
