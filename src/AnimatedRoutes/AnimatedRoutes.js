@@ -5,6 +5,7 @@ import LandingPage from '../Components/LandingPage/LandingPage'
 import Category from '../Components/Category/Category'
 import Difficulty from '../Components/Difficulty/Difficulty';
 import Quiz from '../Components/Quiz/Quiz';
+import Results from '../Components/Results/Results';
 
 import {AnimatePresence} from "framer-motion"
 
@@ -19,6 +20,7 @@ function AnimatedRoutes() {
             <Route exact path='/category' element={<Category />} />
             <Route exact path='/category/difficulty' element={<Difficulty />} />
             <Route exact path='/quiz' element={<Quiz />} />
+            <Route exact path='quiz/results' element={<Results />} />
         </Routes>
     </AnimatePresence>
     )

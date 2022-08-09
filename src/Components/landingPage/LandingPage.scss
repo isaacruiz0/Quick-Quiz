@@ -24,11 +24,14 @@ $text-color: #FFFFFF;
             text-align: center;
             color: $text-color;
             padding: 3rem 0;
-            line-height: 4rem;
+            line-height: 5rem;
             user-select: none;
 
-            font-size: 4rem;
+            font-size: 5rem;
             font-weight: 800;
+            @media screen and (max-width: 400px){
+                padding: 3rem 0;
+            }
             @media screen and (min-width: 700px){
                 font-size:6rem;
                 padding: 6rem 0;
@@ -57,12 +60,15 @@ $text-color: #FFFFFF;
         }
 
         p{
-            padding: 2rem;
-            font-size: 1.75rem;
+            padding: 3rem 2rem 2rem;
+            font-size: 2.5rem;
             color: $text-color;
             font-weight: 600;
             text-align: center;
             user-select: none;
+            @media screen and (max-width: 400px){
+                font-size: 2rem;
+            }     
 
             @media screen and (min-width: 900px){
                 font-size: 3rem;

@@ -14,6 +14,7 @@ function Difficulty() {
     const paramName = categoryName?.toLowerCase().replace(/ /g,"_");
     // I am mapping through here to and making a div for each word
     const difficultyChoices = ['easy', 'medium', 'hard']
+    
 
     useEffect(()=>{
         window.scrollTo(0, 0)

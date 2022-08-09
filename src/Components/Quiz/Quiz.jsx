@@ -19,11 +19,8 @@ function Quiz() {
     const [questionArray, setQuestionArray] = useState([])
     // This will display what number the user is on
     const [numberUserIsOn, setNumberUserIsOn] =useState(1)
-    const [textOfUserAnswer, setTextOfUserAnswer] = useState('')
 
-    let timeOutTime = 400
-
-
+    let timeOutTime = 450
 
     // const categoryName = location.state?.name
     // const difficulty = location.state?.difficulty
@@ -97,11 +94,11 @@ function Quiz() {
             setQuestionNumber(questionNumber + 1)
         }, timeOutTime)
     }
+    // This will handle the logic for comparing the correct answer with the user's answer
     const handleCorrectAnswer = (e) => {
         console.log(e.target)
         // This is the content of the div that the user clicked
         let userAnswer = e.target.outerText
-        setTextOfUserAnswer(userAnswer)
         // Since our "numberUserIsOn" state begins on 1 I am manually checking the first questions answers
         if(numberUserIsOn === 1){
             if(questionArray[0].correctAnswer === userAnswer){
@@ -128,10 +125,9 @@ function Quiz() {
     }
     const handleNextQuestion = (e) =>{
         setTimeout(()=>setNumberUserIsOn(numberUserIsOn + 1), timeOutTime) 
-        if (numberUserIsOn > 10){
+        if (numberUserIsOn == 10){
             // This will take them to page where they can see how well they did
-
-            
+            navigate('/quiz/results')
         }
         else{
             incrementQuestion()
