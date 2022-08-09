@@ -12,22 +12,25 @@ $text-color: #FFFFFF;
     .title{
         width: 100%;
         display: flex;
-        padding: .5rem;
+        padding: .5rem 9.75%;
         color: $text-color;
         font-family: 'Poppins', sans-serif;
         border-bottom: solid $primary-color 1px;
+
         align-items: center;
+        justify-content: space-between;
         display: flex;
         background-color: $secondary-color;
-        font-size: 1.2rem;
+        font-size: 1.25rem;
         h5{
             padding: 0;
             user-select: none;
         }
         @media screen and (min-width: 600px){
-            font-size: 1.5rem;
-            letter-spacing: .1rem;
-            padding: 1rem;
+            font-size: 2.75rem;
+            letter-spacing: .15rem;
+            padding: 1rem 6.75%;
+
         }
     }
     header{
@@ -40,7 +43,7 @@ $text-color: #FFFFFF;
         h4{
             color: $text-color;
             font-family: 'Poppins', sans-serif;
-            padding: .25rem;
+            padding: 1rem;
             text-align: center;
             width: 100%;
             letter-spacing: .1rem;
@@ -82,6 +85,7 @@ $text-color: #FFFFFF;
             display: flex;
             justify-content: center;
             align-items: center;
+            cursor: pointer;
             
             flex-grow: 0;
             box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.3);
@@ -90,6 +94,8 @@ $text-color: #FFFFFF;
                 width: 40%;
                 flex: 0 0 auto;
                 padding: 1rem;
+
+                height: 40%;
                 &:hover{
                     transform: translateY(-10%);
                     box-shadow: 0px 10px 10px 5px rgba(0, 0, 0, 0.25);
@@ -102,6 +108,7 @@ $text-color: #FFFFFF;
                 text-align: center;
                 color: white;
                 letter-spacing: .1rem;
+                transition: all 2s ease-in-out;
 
                 border-radius: 10px;
                 @media screen and (min-width: 600px){
