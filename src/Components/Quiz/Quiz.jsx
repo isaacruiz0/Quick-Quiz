@@ -70,7 +70,7 @@ function Quiz() {
         }
 
     }, [questionArray])
-    // This will increment the question by displaying the next question and its possiblew answers
+    // This will increment the question by displaying the next question and its possible answers
     const incrementQuestion = () =>{
         // This will delay the increment of the question so that the user has time to see whether they got the question correct or wrong via the green and red highlight
         setTimeout(()=>{
@@ -92,46 +92,73 @@ function Quiz() {
         }, timeOutTime)
     }
     // This will handle the logic for comparing the correct answer with the user's answer
+    // This will handle the logic for comparing the correct answer with the user's answer
     const handleCorrectAnswer = (e) => {
-        // This is the content of the div that the user clicked
+        // This is the correct answer according to the data
+        let correctAnswer = questionArray[questionNumber-1].correctAnswer;
+
+        // This is the answer the user choise
         let userAnswer = e.target.outerText
+
+        // This removes the spaces from the answers
+        let correctAnswerNoSpaces = correctAnswer.replace(/\s+/g, '')
+        let userAnswerNoSpaces = userAnswer.replace(/\s+/g, '')
+
         // Since our "numberUserIsOn" state begins on 1 I am manually checking the first questions answers
         if(numberUserIsOn === 1){
-            if(questionArray[0].correctAnswer === userAnswer){
-                console.log('correct answer!', questionNumber)
+            if(correctAnswerNoSpaces == userAnswerNoSpaces){
+
+                // This adds the green class to the div so that the user knows they got the answer correct
                 e.currentTarget.classList.add('green')
+                // setTimeout(()=>{e.currentTarget.classList.remove('green')}, 400)
+
+                // This removes the red class from the div
+                e.currentTarget.classList.remove('red')
+
                 // This is keeping track of how many questions the user gets correcet
                 setNumberOfQuestionsCorrect(numberOfQuestionsCorrect + 1)
-
             }
             else{
+                // Safari will randomly skip the if statement and go straight to this
                 e.currentTarget.classList.add('red')
-                
+                console.log('wrong')
             }
         }
         else{
-            // Subtract for array index reasons
-            if(questionArray[questionNumber-1].correctAnswer === userAnswer){
+            if(correctAnswerNoSpaces == userAnswerNoSpaces){
+
+                // This adds the green class to the div so that the user knows they got the answer correct
                 e.currentTarget.classList.add('green')
+
+                // This removes the red class from the div
+                e.currentTarget.classList.remove('red')
+
                 // This is keeping track of how many questions the user gets correcet
                 setNumberOfQuestionsCorrect(numberOfQuestionsCorrect + 1)
 
             }
             else{
+                // Safari will randomly skip the if statement and go straight to this
                 e.currentTarget.classList.add('red')
-
+                console.log('wrong')
             }
         }
     }
     const handleNextQuestion = (e) =>{
         setTimeout(()=>setNumberUserIsOn(numberUserIsOn + 1), timeOutTime) 
         if (numberUserIsOn === 10){
-            // This will take them to page where they can see how well they did
-            navigate('/quiz/results',{state:{results: numberOfQuestionsCorrect}})
+            handleCorrectAnswer(e)
+            setTimeout(()=>{            
+                // This will take them to page where they can see how well they did
+                navigate('/quiz/results',{state:{results: numberOfQuestionsCorrect}})
+            },450)
+
+
         }
         else{
             incrementQuestion()
             handleCorrectAnswer(e)
+            
 
          }
     }
@@ -161,9 +188,7 @@ function Quiz() {
                 {shuffledArray.map((possibleAnswer)=>{
                     return (
                         <div key={possibleAnswer} onClick={handleNextQuestion} >
-                            <h3>
-                                {possibleAnswer}
-                            </h3>
+                            <h3>{possibleAnswer}</h3>
                         </div>
                     )
                 })}
