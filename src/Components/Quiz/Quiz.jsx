@@ -24,30 +24,31 @@ function Quiz() {
 
     let timeOutTime = 450
 
-    // const categoryName = location.state?.name
-    // const difficulty = location.state?.difficulty
-
-    const getQuiz = async () => {
-        try{
-            // These values were passed by the difficulty Component
-            const categoryName = location.state?.name
-            const difficulty = location.state?.difficulty
-
-            // This makes a get request to get data for the quiz
-            let response = await axios.get(`https://the-trivia-api.com/api/questions?categories=${categoryName}&limit=10&difficulty=${difficulty}`)
-            let arrayDataResponse = await response.data
-
-            // This sets the data to question array so that it is accessible outside of this function
-            setQuestionArray(arrayDataResponse)
-
-        } catch(err){
-            console.log(err)
-        }
-
-    }
+    // These values were passed by the difficulty Component
+    const categoryName = location.state?.name
+    const difficulty = location.state?.difficulty
+    
 
     // This fetches the data on mount
-    useEffect(() => { getQuiz() }, [])
+    useEffect(() => { 
+        const getQuiz = async () => {
+            try{
+
+                // This makes a get request to get data for the quiz
+                let response = await axios.get(`https://the-trivia-api.com/api/questions?categories=${categoryName}&limit=10&difficulty=${difficulty}`)
+                let arrayDataResponse = await response.data
+    
+                // This sets the data to question array so that it is accessible outside of this function
+                setQuestionArray(arrayDataResponse)
+    
+            } catch(err){
+                console.log(err)
+            }
+    
+        }
+        
+        getQuiz()
+     }, [])
 
     // This will set the data for the elements once the state of the question array has been set from the get request
     useEffect(() => { 
@@ -106,7 +107,7 @@ function Quiz() {
 
         // Since our "numberUserIsOn" state begins on 1 I am manually checking the first questions answers
         if(numberUserIsOn === 1){
-            if(correctAnswerNoSpaces == userAnswerNoSpaces){
+            if(correctAnswerNoSpaces === userAnswerNoSpaces){
 
                 // This adds the green class to the div so that the user knows they got the answer correct
                 e.currentTarget.classList.add('green')
@@ -125,7 +126,7 @@ function Quiz() {
             }
         }
         else{
-            if(correctAnswerNoSpaces == userAnswerNoSpaces){
+            if(correctAnswerNoSpaces === userAnswerNoSpaces){
 
                 // This adds the green class to the div so that the user knows they got the answer correct
                 e.currentTarget.classList.add('green')
@@ -146,24 +147,18 @@ function Quiz() {
     }
     const handleNextQuestion = (e) =>{
         setTimeout(()=>setNumberUserIsOn(numberUserIsOn + 1), timeOutTime) 
+
+        incrementQuestion()
+        handleCorrectAnswer(e)
+    }
+    useEffect(()=>{
+        console.log(numberOfQuestionsCorrect)
         if (numberUserIsOn === 10){
-            handleCorrectAnswer(e)
             setTimeout(()=>{            
                 // This will take them to page where they can see how well they did
                 navigate('/quiz/results',{state:{results: numberOfQuestionsCorrect}})
             },450)
-
-
         }
-        else{
-            incrementQuestion()
-            handleCorrectAnswer(e)
-            
-
-         }
-    }
-    useEffect(()=>{
-        console.log(numberOfQuestionsCorrect)
     },[numberOfQuestionsCorrect])
 
     return (
