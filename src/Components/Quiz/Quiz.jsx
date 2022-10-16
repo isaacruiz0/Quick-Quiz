@@ -115,10 +115,16 @@ function Quiz() {
         console.log("user choice: " + e.target.innerText)
         console.log("correct answer: " + correctAnswer)
         if (e.target.innerText === correctAnswer){
-            e.currentTarget.style.backgroundColor = "#00e400c9";
+            let ct = e.currentTarget
+            ct.style.backgroundColor = "#00e400c9";
+
+            setTimeout((e) => {ct.style.backgroundColor = '#FFCC01'}, 850)
             setCorrectAnswersCount(prevCount => prevCount + 1)
         }else{
-            e.currentTarget.style.backgroundColor = "#E93036"
+            let ct = e.currentTarget
+
+            ct.style.backgroundColor = "#E93036"
+            setTimeout((e) => {ct.style.backgroundColor = '#FFCC01'}, 850)
         }
 
     }
