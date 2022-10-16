@@ -47,6 +47,8 @@ function Quiz() {
     const [currentQuestion, setCurrentQuestion] = useState("")
     // These are the possible choices
     const [choices, setChoices] = useState([])
+    // This is the correct answer
+    const [correctAnswer, setCorrectAnswer] = useState("")
     useEffect(()=>{
         if (questionArrayRes){
             console.log(questionArrayRes)      
@@ -55,23 +57,45 @@ function Quiz() {
     
             // This sets and displays the current question
             setCurrentQuestion(questionArrayRes[questionNum].question)  
+
+            // This sets the correct answer
+            setCorrectAnswer(questionArrayRes[questionNum].correctAnswer)
+
             // This creates an unshuffled array of the possible choices
             let unshuffledArray = questionArrayRes[questionNum].incorrectAnswers
             unshuffledArray.push(questionArrayRes[questionNum].correctAnswer)
 
             let shuffledArray = unshuffledArray.sort(() => (Math.random() > .5) ? 1 : -1)
 
-            setChoices(shuffledArray)
+            setChoices(shuffledArray.slice(0,4))
             
         }
     },[questionArrayRes])
 
     // This will trigger every time the questionNum is incremented
     useEffect(()=>{
-        if(questionArrayRes){
-            setCurrentQuestion(questionArrayRes[questionNum].question)  
-
+        const updateNextQuestion = () =>{
+            if(questionArrayRes){
+                setCurrentQuestion(questionArrayRes[questionNum].question)  
+                // This sets the correct answer
+                setCorrectAnswer(questionArrayRes[questionNum].correctAnswer)
+    
+                // This creates an unshuffled array of the possible choices
+                let unshuffledArray = questionArrayRes[questionNum].incorrectAnswers
+                unshuffledArray.push(questionArrayRes[questionNum].correctAnswer)
+    
+                let shuffledArray = unshuffledArray.sort(() => (Math.random() > .5) ? 1 : -1)
+    
+                setChoices(shuffledArray)
+    
+                console.log(choices)
+                console.log(currentQuestion)
+                console.log(correctAnswer)
+            }
         }
+
+
+        setTimeout(updateNextQuestion, 700)
     },[questionNum])
 
     return (
@@ -92,13 +116,11 @@ function Quiz() {
             </div>
             <header className="questionDiv">
                 <h4>{currentQuestion}</h4>
-                {questionNum}
-                <button onClick={()=>setQuestionNum(questionNum+1)}>Increment</button>
             </header>
             <main>
                 {choices.map((possibleAnswer)=>{
                     return (
-                        <div key={possibleAnswer} >
+                        <div key={possibleAnswer} onClick={()=>setQuestionNum(questionNum => questionNum + 1)} >
                             <h3>{possibleAnswer}</h3>
                         </div>
                     )
