@@ -40,6 +40,7 @@ function Quiz() {
     
     if (questionArrayRes){
         console.log(questionArrayRes)      
+        // Sets and displays the category name
         displayCategoryName = questionArrayRes[0].category
 
     }
@@ -57,8 +58,9 @@ function Quiz() {
                 <meta name="theme-color" content="#006CB7" />
             </Helmet>
             <div className="title">
-                <h1>{displayCategoryName}</h1>
-                <h5>/10</h5>
+                <h5>{displayCategoryName}</h5>
+                {/* Placeholder */}
+                <h5>1/10</h5>
             </div>
             <header className="questionDiv">
                 <h4></h4>
