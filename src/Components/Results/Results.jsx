@@ -25,7 +25,7 @@ function Results() {
             <meta name="theme-color" content="#FFCC01" />
         </Helmet>
         <div className="titleDiv">
-            <h2>{resultsOfQuiz} out of 10 answers correct!</h2>
+            <h2>{resultsOfQuiz}/10 answers correct!</h2>
         </div>
         <main>
             <p>Ready for another challenge?</p>

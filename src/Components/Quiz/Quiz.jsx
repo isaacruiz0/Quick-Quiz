@@ -118,13 +118,13 @@ function Quiz() {
             let ct = e.currentTarget
             ct.style.backgroundColor = "#00e400c9";
 
-            setTimeout((e) => {ct.style.backgroundColor = '#FFCC01'}, 850)
+            setTimeout((e) => {ct.style.backgroundColor = '#013CBA'}, 850)
             setCorrectAnswersCount(prevCount => prevCount + 1)
         }else{
             let ct = e.currentTarget
 
             ct.style.backgroundColor = "#E93036"
-            setTimeout((e) => {ct.style.backgroundColor = '#FFCC01'}, 850)
+            setTimeout((e) => {ct.style.backgroundColor = '#013CBA'}, 850)
         }
 
     }
