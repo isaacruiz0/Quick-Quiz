@@ -15,8 +15,8 @@ function Quiz() {
 
     // This is the variable that will contain the question array data
     const [questionArrayRes, setQuestionArrayRes] = useState(null)
-    // This variable is used for the 
-    
+    // This variable is used for displaying the category name
+    let displayCategoryName
 
     useEffect(()=>{
 
@@ -37,7 +37,10 @@ function Quiz() {
         getQuizData(difficulty, categoryName)
     },[])
 
+    
     if (questionArrayRes){
+        console.log(questionArrayRes)      
+        displayCategoryName = questionArrayRes[0].category
 
     }
 
@@ -54,6 +57,7 @@ function Quiz() {
                 <meta name="theme-color" content="#006CB7" />
             </Helmet>
             <div className="title">
+                <h1>{displayCategoryName}</h1>
                 <h5>/10</h5>
             </div>
             <header className="questionDiv">
