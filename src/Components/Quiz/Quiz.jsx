@@ -72,8 +72,11 @@ function Quiz() {
         }
     },[questionArrayRes])
 
+    const [questionCount, setQuestionCount] = useState(1)
+    
     // This will trigger every time the questionNum is incremented
     useEffect(()=>{
+   
         const updateNextQuestion = () =>{
             if(questionArrayRes){
                 setCurrentQuestion(questionArrayRes[questionNum].question)  
@@ -91,12 +94,28 @@ function Quiz() {
                 console.log(choices)
                 console.log(currentQuestion)
                 console.log(correctAnswer)
+
+                setQuestionCount(prevCount => prevCount + 1)
             }
         }
 
 
         setTimeout(updateNextQuestion, 700)
     },[questionNum])
+
+    // This will handle the conditional styling for the answer is correct or wrong
+    const [bgColorChoice, setBgColorChoice] = useState(null)
+    // This will be executed whenever the user chooses their answer
+    const checkAnswer = (e) =>{
+        console.log("user choice: " + e.target.innerText)
+        console.log("correct answer: " + correctAnswer)
+        if (e.target.innerText === correctAnswer){
+            console.log("Green")
+        }else{
+            console.log("Red")
+        }
+
+    }
 
     return (
         <motion.div
@@ -112,7 +131,7 @@ function Quiz() {
             <div className="title">
                 <h5>{displayCategoryName}</h5>
                 {/* Placeholder */}
-                <h5>1/10</h5>
+                <h5>{questionCount}/10</h5>
             </div>
             <header className="questionDiv">
                 <h4>{currentQuestion}</h4>
@@ -120,7 +139,14 @@ function Quiz() {
             <main>
                 {choices.map((possibleAnswer)=>{
                     return (
-                        <div key={possibleAnswer} onClick={()=>setQuestionNum(questionNum => questionNum + 1)} >
+                        <div 
+                            key={possibleAnswer}
+                            onClick={(e)=>{
+                            setQuestionNum(questionNum => questionNum + 1)
+                            checkAnswer(e)
+                            }} 
+                            
+                        >
                             <h3>{possibleAnswer}</h3>
                         </div>
                     )
