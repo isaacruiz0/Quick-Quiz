@@ -100,11 +100,16 @@ function Quiz() {
         }
 
 
-        setTimeout(updateNextQuestion, 900)
+        setTimeout(() => {
+            if(questionNum === 10){
+                navigate("/quiz/results", {state:{results: correctAnswersCount}})
+            }
+
+            updateNextQuestion()
+        }
+        , 900)
     },[questionNum])
 
-    // This will handle the conditional styling for the answer is correct or wrong
-    const [bgColorChoice, setBgColorChoice] = useState(null)
     // This will be executed whenever the user chooses their answer
     const checkAnswer = (e) =>{
         console.log("user choice: " + e.target.innerText)
@@ -112,7 +117,6 @@ function Quiz() {
         if (e.target.innerText === correctAnswer){
             e.currentTarget.style.backgroundColor = "#00e400c9";
             setCorrectAnswersCount(prevCount => prevCount + 1)
-            console.log(correctAnswersCount)
         }else{
             e.currentTarget.style.backgroundColor = "#E93036"
         }
