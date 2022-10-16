@@ -15,8 +15,6 @@ function Quiz() {
 
     // This is the variable that will contain the question array data
     const [questionArrayRes, setQuestionArrayRes] = useState(null)
-    // This variable is used for displaying the category name
-    let displayCategoryName
 
     useEffect(()=>{
 
@@ -35,16 +33,36 @@ function Quiz() {
         }
         // Execute function on mount
         getQuizData(difficulty, categoryName)
+
+
+
     },[])
 
+    // This  is used for displaying the category name
+   const [displayCategoryName, setDisplayCategoryName] = useState("")
+
+    // This controls what question in the array to display 
+    const [questionNum, setQuestionNum] = useState(0)
+    // This is the current question to display to the user
+    const [currentQuestion, setCurrentQuestion] = useState("")
+    useEffect(()=>{
+        if (questionArrayRes){
+            console.log(questionArrayRes)      
+            // Sets and displays the category name
+            setDisplayCategoryName(questionArrayRes[0].category)
     
-    if (questionArrayRes){
-        console.log(questionArrayRes)      
-        // Sets and displays the category name
-        displayCategoryName = questionArrayRes[0].category
+            // This sets and displays the current question
+            setCurrentQuestion(questionArrayRes[questionNum].question)  
+    
+        }
+    },[questionArrayRes])
 
-    }
-
+    // This will trigger every time the questionNum is incremented
+    useEffect(()=>{
+        if(questionArrayRes){
+            setCurrentQuestion(questionArrayRes[questionNum].question)  
+        }
+    },[questionNum])
 
     return (
         <motion.div
@@ -63,7 +81,9 @@ function Quiz() {
                 <h5>1/10</h5>
             </div>
             <header className="questionDiv">
-                <h4></h4>
+                <h4>{currentQuestion}</h4>
+                {questionNum}
+                <button onClick={()=>setQuestionNum(questionNum+1)}>Increment</button>
             </header>
             <main>
 
