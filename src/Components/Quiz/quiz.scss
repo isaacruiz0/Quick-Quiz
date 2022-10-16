@@ -73,6 +73,7 @@ $text-color: #FFFFFF;
         border-top-right-radius: 3.75rem;
         @media screen and (min-width: 600px){
             flex-direction: row;
+            padding-top: 3rem;
             flex-wrap: wrap;
             justify-content: space-evenly;
             align-items: center;
