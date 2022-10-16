@@ -45,6 +45,8 @@ function Quiz() {
     const [questionNum, setQuestionNum] = useState(0)
     // This is the current question to display to the user
     const [currentQuestion, setCurrentQuestion] = useState("")
+    // These are the possible choices
+    const [choices, setChoices] = useState([])
     useEffect(()=>{
         if (questionArrayRes){
             console.log(questionArrayRes)      
@@ -53,7 +55,14 @@ function Quiz() {
     
             // This sets and displays the current question
             setCurrentQuestion(questionArrayRes[questionNum].question)  
-    
+            // This creates an unshuffled array of the possible choices
+            let unshuffledArray = questionArrayRes[questionNum].incorrectAnswers
+            unshuffledArray.push(questionArrayRes[questionNum].correctAnswer)
+
+            let shuffledArray = unshuffledArray.sort(() => (Math.random() > .5) ? 1 : -1)
+
+            setChoices(shuffledArray)
+            
         }
     },[questionArrayRes])
 
@@ -61,6 +70,7 @@ function Quiz() {
     useEffect(()=>{
         if(questionArrayRes){
             setCurrentQuestion(questionArrayRes[questionNum].question)  
+
         }
     },[questionNum])
 
@@ -86,7 +96,13 @@ function Quiz() {
                 <button onClick={()=>setQuestionNum(questionNum+1)}>Increment</button>
             </header>
             <main>
-
+                {choices.map((possibleAnswer)=>{
+                    return (
+                        <div key={possibleAnswer} >
+                            <h3>{possibleAnswer}</h3>
+                        </div>
+                    )
+                })}
             </main>
         </motion.div>
     )
