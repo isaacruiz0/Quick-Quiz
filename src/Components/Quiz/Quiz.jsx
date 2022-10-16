@@ -15,6 +15,8 @@ function Quiz() {
 
     // This is the variable that will contain the question array data
     const [questionArrayRes, setQuestionArrayRes] = useState(null)
+    // This will keep track of how many answers the user got correct
+    const [correctAnswersCount, setCorrectAnswersCount] = useState(0)
 
     useEffect(()=>{
 
@@ -88,19 +90,17 @@ function Quiz() {
                 unshuffledArray.push(questionArrayRes[questionNum].correctAnswer)
     
                 let shuffledArray = unshuffledArray.sort(() => (Math.random() > .5) ? 1 : -1)
-    
+                
+                // This sets the displayed choices to the shuffled array of choices
                 setChoices(shuffledArray)
-    
-                console.log(choices)
-                console.log(currentQuestion)
-                console.log(correctAnswer)
 
+                // This increments the question count so the user knows what question they are on
                 setQuestionCount(prevCount => prevCount + 1)
             }
         }
 
 
-        setTimeout(updateNextQuestion, 700)
+        setTimeout(updateNextQuestion, 900)
     },[questionNum])
 
     // This will handle the conditional styling for the answer is correct or wrong
@@ -110,9 +110,11 @@ function Quiz() {
         console.log("user choice: " + e.target.innerText)
         console.log("correct answer: " + correctAnswer)
         if (e.target.innerText === correctAnswer){
-            console.log("Green")
+            e.currentTarget.style.backgroundColor = "#00e400c9";
+            setCorrectAnswersCount(prevCount => prevCount + 1)
+            console.log(correctAnswersCount)
         }else{
-            console.log("Red")
+            e.currentTarget.style.backgroundColor = "#E93036"
         }
 
     }
@@ -140,12 +142,13 @@ function Quiz() {
                 {choices.map((possibleAnswer)=>{
                     return (
                         <div 
+                            // style={handleStyling(bgColorChoice)}
                             key={possibleAnswer}
                             onClick={(e)=>{
                             setQuestionNum(questionNum => questionNum + 1)
                             checkAnswer(e)
                             }} 
-                            
+
                         >
                             <h3>{possibleAnswer}</h3>
                         </div>
